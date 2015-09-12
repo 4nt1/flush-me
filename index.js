@@ -1,4 +1,5 @@
 var Looper = require('./app/lib/Looper.js');
+var server = require('./app/server.js');
 var tasksName = [
     'light.js',
     'sound.js'
@@ -6,6 +7,7 @@ var tasksName = [
 var tasks = {};
 var app = {
     looper: new Looper(),
+    socket: server.socket,
     destroy: function () {
         looper.stop();
         var keys = Object.keys(tasks);
@@ -21,7 +23,10 @@ var app = {
 };
 for (var index in tasksName) {
     var name = tasksName[index];
-    tasks[name] = require('app/tasks/' + tasksName[index])(app);
+    tasks[name] = require('./app/tasks/' + tasksName[index])(app);
     looper.add(tasks[name].loop);
 }
-looper.start();
+
+server.http.listen(3000, function () {
+    looper.start();
+});

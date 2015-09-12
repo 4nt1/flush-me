@@ -17,7 +17,7 @@ module.exports = function (app) {
 
     clearScreen();
 
-    sound = new mraa.Aio(0);
+    sound = new mraa.Aio(1);
 
     function fillText(text) {
       for (var index = text.length; index < SCREEN_COLUMNS; index++) {

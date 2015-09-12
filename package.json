@@ -2,12 +2,13 @@
   "name": "flush-me",
   "description": "",
   "version": "0.0.0",
-  "main": "main.js",
+  "main": "index.js",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.12.5"
   },
   "dependencies": {
-      "q": "latest",
+    "q": "latest",
+    "mraa": "0.7.5",
     "express": "^4.10.2",
     "socket.io": "^1.3.6",
     "body-parser": "1.13.3",
