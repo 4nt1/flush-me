@@ -72,7 +72,7 @@ module.exports = function (app) {
         display.write(fillText('MIN : ' + String(soundMinValue)));
         wait(2000).then(writeStepName.bind(null, "Listening")).then(function () {
             isInitialized = true;
-            console.log('start listening');
+            console.log('Sound initialized');
         });
     }
 

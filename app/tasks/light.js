@@ -39,6 +39,7 @@ module.exports = function (app) {
       console.log("MAX : " + lightMaxValue);
       console.log("MIN : " + lightMinValue);
       isInitialized = true;
+      console.log('Light initialized');
   }
 
   waitAndRead();

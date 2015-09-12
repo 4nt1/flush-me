@@ -1,6 +1,6 @@
 function Looper() {
   this.isRunning = false;
-  this.run = _.bind(Looper.prototype.run, this);
+  this.run = Looper.prototype.run.bind(this);
   this.frame = -1;
   this.timeoutId = null;
   this.callbacks = [];
@@ -47,7 +47,7 @@ Looper.prototype.stackSize = function () {
 
 Looper.prototype.remove = function (callback, context) {
   var
-    finder = _.identity,
+    finder,
     countRemoved = 0,
     valuesToRemove = [];
   if (callback && context) {
@@ -63,7 +63,7 @@ Looper.prototype.remove = function (callback, context) {
       return context === item.context;
     }
   }
-  valuesToRemove = _.filter(this.callbacks, finder);
+  valuesToRemove = this.callbacks.filter(finder);
   for (var index in valuesToRemove) {
     countRemoved += this.callbacks.splice(this.callbacks.indexOf(valuesToRemove[index]), 1).length;
   }

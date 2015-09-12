@@ -1,4 +1,4 @@
-module.exports = function (serverlication) {
+module.exports = function () {
   var express     = require('express');
   var server      = express();
   var http        = require('http').Server(server);
