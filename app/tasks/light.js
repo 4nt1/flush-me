@@ -14,18 +14,19 @@ module.exports = function (app) {
   function calibrationStep() {
      var value = light.read();
      var points = [ '.', '.', '.' ].slice(0, calibrationIteration % 4).join('');
-     console.log("Calibrating" + points.join(''));
+     console.log("Calibrating" + points);
      lightMaxValue = Math.max(lightMaxValue, value);
      lightMinValue = Math.min(lightMinValue, value);
      if (++calibrationIteration < numberOfCalibrations) {
          return waitAndRead();
      } else {
          startApplication();
-     }
+     } 
   }
 
   function waitAndRead() {
-      return wait(1000).then(calibrationStep);
+      console.log('wait');
+      return wait(100).then(calibrationStep);
   }
 
   function wait(time) {
@@ -44,8 +45,8 @@ module.exports = function (app) {
 
   waitAndRead();
 
-  function loop() {
-    if (!isInitialized) return;
+  function loop(frame) {
+    if (!isInitialized || frame % 2) return;
     var value = light.read();
     if (value > lightMaxValue * 0.9) {
       app.socket.emit('bulb-on');

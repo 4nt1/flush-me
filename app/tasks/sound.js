@@ -82,7 +82,7 @@ module.exports = function (app) {
         if (frame % 20 === 0) {
             writeStepName(String(value), 1);
         }
-        if (value > 700) {
+        if (value > 900) {
             console.log(value);
             app.destroy();
         }

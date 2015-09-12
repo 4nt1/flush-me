@@ -15,11 +15,7 @@ module.exports = function () {
   server.use(express.static('public'));
 
   server.get('/', function(req, res){
-    res.sendFile('index.html', { root: __dirname });
-  });
-
-  server.get('/demo', function(req, res){
-    res.sendFile('demo.html', { root: __dirname });
+    res.sendFile('views/index.html', { root: __dirname });
   });
 
   server.get('/on', function(req, res){
