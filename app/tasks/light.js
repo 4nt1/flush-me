@@ -14,7 +14,6 @@ module.exports = function (app) {
   function calibrationStep() {
      var value = light.read();
      var points = [ '.', '.', '.' ].slice(0, calibrationIteration % 4).join('');
-     console.log("Calibrating" + points);
      lightMaxValue = Math.max(lightMaxValue, value);
      lightMinValue = Math.min(lightMinValue, value);
      if (++calibrationIteration < numberOfCalibrations) {
@@ -25,7 +24,6 @@ module.exports = function (app) {
   }
 
   function waitAndRead() {
-      console.log('wait');
       return wait(100).then(calibrationStep);
   }
 

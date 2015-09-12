@@ -21,6 +21,7 @@ var app = {
         }
         app.looper.destroy();
         console.log('App terminate');
+        process.exit(0);
     }
 };
 for (var index in tasksName) {
