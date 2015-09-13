@@ -4,7 +4,14 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-  <h1 id='hint'>Free ! Go for it !</h1>
+  <div class="notification"></div>
+  <input id='name-input' type="text" placeholder="Your name here">
+  <button id='exterminate'>Enter the queue</button>
+
+  <div id="queue">
+
+  </div>
+  <h4 id='hint'>Free ! Go for it !</h4>
   <div id="bulb">
     <svg  version="1.1"
           id="Capa_1"
@@ -41,13 +48,6 @@
   </div>
   <script src="/socket.io/socket.io.js"></script>
 
-  <input id='name-input' type="text" placeholder="Your name here">
-  <button id='exterminate'>Enter the queue</button>
-
-  <div id="queue">
-
-  </div>
-
   <script>
     $(document).ready(function() {
 
@@ -79,17 +79,17 @@
       });
 
       socket.on('new-user', function(msg) {
-        $("#queue").append('<div class="user-name">' + msg.userName +'</div>');
+        $("#queue").append('<div id="' + msg.userName + '" class="user-name">' + msg.userName +'</div>');
       });
 
       socket.on('remove-user-from-queue', function(msg) {
-        $('#queue .user-name').find(function(o) {
-          return $(o).text() === msg.userName;
-        }).remove();
+        console.log('rm from queue', $("#queue .user-name#" +  msg.userName));
+        $("#queue .user-name#" +  msg.userName).remove();
       });
 
       socket.on('notify-next-user', function(msg) {
-        alert(msg.userName + " it's your turn to go.");
+        console.log('notify');
+        $('.notification').html(msg.userName + " it's your turn to go.");
       });
     });
   </script>
@@ -104,8 +104,8 @@
     #bulb {
       margin: 0 auto;
       display: block;
-      width : 80%;
-      height: 80%;
+      width : 493px;
+      height: 493px;
     }
     .user-name {
       border : 1px solid blue;

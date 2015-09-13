@@ -44,7 +44,7 @@ module.exports = function (app) {
   waitAndRead();
 
   function loop(frame) {
-    if (!isInitialized || frame % 10) return;
+    if (!isInitialized || frame % 100) return;
     var value = light.read();
     if (value > lightMaxValue * 0.9) {
 
