@@ -32,7 +32,9 @@ for (var index in tasksName) {
     tasks[name] = require('./app/tasks/' + tasksName[index])(app);
     app.looper.add(tasks[name].loop);
 }
-app.looper.add(app.screen.commit, app.screen);
+app.looper.add(function (frame) {
+    if (frame % 10) app.screen.commit();
+});
 
 console.log('start server');
 server.http.listen(3000, function () {
