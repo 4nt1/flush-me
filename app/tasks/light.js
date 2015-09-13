@@ -1,6 +1,7 @@
 module.exports = function (app) {
   var mraa = require('mraa');
   var Q = require('q');
+  var screen = app.screen.getChildZone(0, 1, 5);
   var isInitialized = false;
   console.log('MRAA Version: ' + mraa.getVersion());
 
@@ -13,7 +14,6 @@ module.exports = function (app) {
 
   function calibrationStep() {
      var value = light.read();
-     var points = [ '.', '.', '.' ].slice(0, calibrationIteration % 4).join('');
      lightMaxValue = Math.max(lightMaxValue, value);
      lightMinValue = Math.min(lightMinValue, value);
      if (++calibrationIteration < numberOfCalibrations) {
@@ -34,7 +34,6 @@ module.exports = function (app) {
   }
 
   function startApplication() {
-      console.log('done calibrating');
       console.log("MAX : " + lightMaxValue);
       console.log("MIN : " + lightMinValue);
       isInitialized = true;
@@ -46,6 +45,7 @@ module.exports = function (app) {
   function loop(frame) {
     if (!isInitialized || frame % 100) return;
     var value = light.read();
+    screen.write('L:' + String(value));
     if (value > lightMaxValue * 0.9) {
 
       if (app.session.users) {
@@ -72,7 +72,7 @@ module.exports = function (app) {
       app.socket.emit('bulb-off');
     }
   }
-
+  screen.write('L:cal');
 
   return {
     loop: loop,
