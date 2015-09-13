@@ -33,7 +33,7 @@ for (var index in tasksName) {
     app.looper.add(tasks[name].loop);
 }
 app.looper.add(function (frame) {
-    if (frame % 10) app.screen.commit();
+    if (frame % 10 === 0) app.screen.commit();
 });
 
 console.log('start server');
