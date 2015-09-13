@@ -14,7 +14,6 @@ module.exports = function (app) {
 
   function calibrationStep() {
      var value = light.read();
-     var points = [ '.', '.', '.' ].slice(0, calibrationIteration % 4).join('');
      lightMaxValue = Math.max(lightMaxValue, value);
      lightMinValue = Math.min(lightMinValue, value);
      if (++calibrationIteration < numberOfCalibrations) {
@@ -35,7 +34,6 @@ module.exports = function (app) {
   }
 
   function startApplication() {
-      console.log('done calibrating');
       console.log("MAX : " + lightMaxValue);
       console.log("MIN : " + lightMinValue);
       isInitialized = true;
@@ -47,6 +45,7 @@ module.exports = function (app) {
   function loop(frame) {
     if (!isInitialized || frame % 2) return;
     var value = light.read();
+    screen.write('L:' + String(value));
     if (value > lightMaxValue * 0.9) {
       app.socket.emit('bulb-on');
     } else {
