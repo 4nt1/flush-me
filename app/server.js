@@ -5,6 +5,11 @@ module.exports = function () {
   var io          = require('socket.io')(http);
   var bodyParser  = require('body-parser');
   var session     = require('express-session');
+  var exphbs      = require('express-handlebars');
+
+  server.engine('handlebars', exphbs({defaultLayout: 'main'}));
+  server.set('view engine', 'handlebars');
+  server.set('views',  __dirname + '/views');
 
   server.use(bodyParser.json());
   server.use(bodyParser.urlencoded({
@@ -17,7 +22,8 @@ module.exports = function () {
   server.use(express.static('../public'));
 
   server.get('/', function(req, res){
-    res.sendFile('views/index.html', { root: __dirname });
+    // res.sendFile('views/index.html', { root: __dirname });
+    res.render('index', {layout: false, users: session.users});
   });
 
   server.get('/on', function(req, res){

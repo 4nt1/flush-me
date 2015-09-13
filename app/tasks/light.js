@@ -3,7 +3,6 @@ module.exports = function (app) {
   var Q = require('q');
   var screen = app.screen.getChildZone(0, 1, 5);
   var isInitialized = false;
-  console.log('MRAA Version: ' + mraa.getVersion());
 
   var light = new mraa.Aio(0);
 
@@ -43,7 +42,7 @@ module.exports = function (app) {
   waitAndRead();
 
   function loop(frame) {
-    if (!isInitialized || frame % 100) return;
+    if (!isInitialized || frame % 10) return;
     var value = light.read();
     screen.write('L:' + String(value));
     if (value > lightMaxValue * 0.9) {
@@ -54,18 +53,29 @@ module.exports = function (app) {
         })[0];
         if (user) {
           app.session.users.splice(app.session.users.indexOf(user), 1);
+          console.log('remove user ' + user.name);
           app.socket.emit('remove-user-from-queue', {userName: user.name});
         }
       }
       app.socket.emit('bulb-on');
+
     } else {
       if (app.session.users) {
-        var user = app.session.users.filter(function(o) {
-          return o.status === 'waiting'
-        })[0];
-        if (user) {
-          user.status = 'notified';
-          app.socket.emit('notify-next-user', {userName: user.name});
+
+        var notifiedUsers = app.session.users.filter(function(o) {
+          return o.status === 'notified'
+        });
+
+        if (notifiedUsers.length === 0) {
+          var user = app.session.users.filter(function(o) {
+            return o.status === 'waiting'
+          })[0];
+          if (user) {
+            user.status = 'notified';
+            console.log('notify user ' + user.name);
+            app.socket.emit('notify-next-user', {userName: user.name});
+          }
+
         }
 
       }
