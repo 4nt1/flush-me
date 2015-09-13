@@ -4,8 +4,10 @@
 module.exports = function (app) {
     var lcd = require('../lib/lcd.js');
     var mraa = require('mraa');
+    var music = require('../play.js');
     var Q = require('q');
     var screen = app.screen.getChildZone(0, 0, 5);
+    var musicScreen = app.screen.getChildZone(6, 0, 10)
     var sound;
     var soundMaxValue = 0;
     var soundMinValue = 1023;
@@ -49,9 +51,13 @@ module.exports = function (app) {
         if (!isInitialized) return;
         var value = sound.read();
         screen.write('S:' + String(value));
-        if (value > 700) {
+        if (value > 700 && !music.isPlaying()) {
             console.log(value);
-            app.destroy();
+            musicScreen.write('music: on');
+            music.play();
+            wait(11000).then(function () {
+                musicScreen.write('music: off');
+            }).then(music.stop);
         }
 
     }
@@ -61,6 +67,7 @@ module.exports = function (app) {
     }
 
     screen.write('S:cal');
+    musicScreen.write('music: off');
     waitAndRead();
 
     return {
