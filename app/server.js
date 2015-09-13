@@ -12,7 +12,9 @@ module.exports = function () {
   }));
 
   server.use(session({ secret: 'thisissecret', cookie: { maxAge: 60000 }}))
-  server.use(express.static('public'));
+  session.users = [];
+
+  server.use(express.static('../public'));
 
   server.get('/', function(req, res){
     res.sendFile('views/index.html', { root: __dirname });
@@ -30,23 +32,20 @@ module.exports = function () {
 
   server.post('/queue', function(req, res){
     var userName = req.body.userName;
-    if (session.users) {
-
+    if (session.users.indexOf(userName) === -1) {
+      var user = {status: 'waiting', name: userName};
+      session.users.push(user);
+      io.emit('new-user', {userName: userName});
+      res.json({response: 'true'});
     } else {
-      session.users = [];
-      session.users.push(userName);
+      res.json({response: 'false'});
     }
-    io.emit('new-user', {userName: userName});
-    res.json({response: userName});
-  })
-
-  io.on('connection', function(socket){
-
   });
 
   return {
     http: http,
-    socket: io
+    socket: io,
+    session: session
   };
 
 };

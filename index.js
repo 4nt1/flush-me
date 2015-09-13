@@ -10,6 +10,7 @@ var app = {
     screen: new Screen(0),
     looper: new Looper(),
     socket: server.socket,
+    session:  server.session,
     destroy: function () {
         console.log('App is terminating');
         app.looper.stop();
@@ -36,6 +37,7 @@ app.looper.add(app.screen.commit, app.screen);
 console.log('start server');
 server.http.listen(3000, function () {
     console.log('server started, start looper');
+    app.session.users = [];
     app.looper.start();
 });
 
