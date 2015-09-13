@@ -1,4 +1,5 @@
 var Looper = require('./app/lib/Looper.js');
+var Screen = require('./app/Screen.js')();
 var server = require('./app/server.js')();
 var tasksName = [
     'light.js',
@@ -6,10 +7,11 @@ var tasksName = [
 ];
 var tasks = {};
 var app = {
+    screen: new Screen(0),
     looper: new Looper(),
     socket: server.socket,
     destroy: function () {
-        console.log('destroy call');
+        console.log('App is terminating');
         app.looper.stop();
         var keys = Object.keys(tasks);
         for (var index in keys) {
@@ -20,7 +22,6 @@ var app = {
             }
         }
         app.looper.destroy();
-        console.log('App terminate');
         process.exit(0);
     }
 };
@@ -30,9 +31,11 @@ for (var index in tasksName) {
     tasks[name] = require('./app/tasks/' + tasksName[index])(app);
     app.looper.add(tasks[name].loop);
 }
+app.looper.add(app.screen.commit, app.screen);
 
 console.log('start server');
 server.http.listen(3000, function () {
     console.log('server started, start looper');
     app.looper.start();
 });
+

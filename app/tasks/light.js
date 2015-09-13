@@ -1,6 +1,7 @@
 module.exports = function (app) {
   var mraa = require('mraa');
   var Q = require('q');
+  var screen = app.screen.getChildZone(0, 1, 5);
   var isInitialized = false;
   console.log('MRAA Version: ' + mraa.getVersion());
 
@@ -20,7 +21,7 @@ module.exports = function (app) {
          return waitAndRead();
      } else {
          startApplication();
-     } 
+     }
   }
 
   function waitAndRead() {
@@ -52,7 +53,7 @@ module.exports = function (app) {
       app.socket.emit('bulb-off');
     }
   }
-
+  screen.write('L:cal');
 
   return {
     loop: loop,
