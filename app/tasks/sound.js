@@ -4,6 +4,7 @@
 module.exports = function (app) {
     var lcd = require('../lib/lcd.js');
     var mraa = require('mraa');
+    var music = require('../play.js');
     var Q = require('q');
     var screen = app.screen.getChildZone(0, 0, 5);
     var sound;
@@ -49,9 +50,10 @@ module.exports = function (app) {
         if (!isInitialized) return;
         var value = sound.read();
         screen.write('S:' + String(value));
-        if (value > 700) {
+        if (value > 700 && !music.isPlaying()) {
             console.log(value);
-            app.destroy();
+            music.play();
+            wait(10000).then(music.stop);
         }
 
     }
