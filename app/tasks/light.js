@@ -20,7 +20,7 @@ module.exports = function (app) {
          return waitAndRead();
      } else {
          startApplication();
-     } 
+     }
   }
 
   function waitAndRead() {
@@ -44,11 +44,31 @@ module.exports = function (app) {
   waitAndRead();
 
   function loop(frame) {
-    if (!isInitialized || frame % 2) return;
+    if (!isInitialized || frame % 10) return;
     var value = light.read();
     if (value > lightMaxValue * 0.9) {
+
+      if (app.session.users) {
+        var user = app.session.users.filter(function(o) {
+          return o.status === 'notified'
+        })[0];
+        if (user) {
+          app.session.users.splice(app.session.users.indexOf(user), 1);
+          app.socket.emit('remove-user-from-queue', {userName: user.name});
+        }
+      }
       app.socket.emit('bulb-on');
     } else {
+      if (app.session.users) {
+        var user = app.session.users.filter(function(o) {
+          return o.status === 'waiting'
+        })[0];
+        if (user) {
+          user.status = 'notified';
+          app.socket.emit('notify-next-user', {userName: user.name});
+        }
+
+      }
       app.socket.emit('bulb-off');
     }
   }

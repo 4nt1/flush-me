@@ -8,6 +8,7 @@ var tasks = {};
 var app = {
     looper: new Looper(),
     socket: server.socket,
+    session:  server.session,
     destroy: function () {
         console.log('destroy call');
         app.looper.stop();
@@ -34,5 +35,6 @@ for (var index in tasksName) {
 console.log('start server');
 server.http.listen(3000, function () {
     console.log('server started, start looper');
+    app.session.users = [];
     app.looper.start();
 });

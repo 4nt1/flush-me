@@ -1,0 +1,126 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/antoine/.nodenv/versions/iojs-2.2.1/bin/iojs',
+1 verbose cli   '/Users/antoine/.nodenv/versions/iojs-2.2.1/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@2.11.0
+3 info using node@v2.2.1
+4 verbose readDependencies loading dependencies from /Users/antoine/src/flush-me/package.json
+5 warn package.json flush-me@0.0.0 No repository field.
+6 warn package.json flush-me@0.0.0 No license field.
+7 verbose install where, deps [ '/Users/antoine/src/flush-me',
+7 verbose install   [ 'q', 'express', 'socket.io', 'body-parser', 'express-session' ] ]
+8 verbose install where, peers [ '/Users/antoine/src/flush-me', [] ]
+9 verbose installManyTop reading for lifecycle /Users/antoine/src/flush-me/package.json
+10 info preinstall flush-me@0.0.0
+11 verbose installManyTop reading scoped package data from /Users/antoine/src/flush-me/node_modules/body-parser/package.json
+12 verbose installManyTop reading scoped package data from /Users/antoine/src/flush-me/node_modules/express/package.json
+13 verbose installManyTop reading scoped package data from /Users/antoine/src/flush-me/node_modules/express-session/package.json
+14 verbose installManyTop reading scoped package data from /Users/antoine/src/flush-me/node_modules/mraa/package.json
+15 verbose installManyTop reading scoped package data from /Users/antoine/src/flush-me/node_modules/q/package.json
+16 verbose installManyTop reading scoped package data from /Users/antoine/src/flush-me/node_modules/socket.io/package.json
+17 info package.json q@1.4.1 license should be a valid SPDX license expression
+18 info package.json socket.io@1.3.6 No license field.
+19 info package.json mraa@0.7.5 No repository field.
+20 verbose readDependencies loading dependencies from /Users/antoine/src/flush-me/package.json
+21 verbose targetResolver reading package data from /Users/antoine/src/flush-me/node_modules/body-parser/package.json
+22 verbose targetResolver reading package data from /Users/antoine/src/flush-me/node_modules/express/package.json
+23 verbose targetResolver reading package data from /Users/antoine/src/flush-me/node_modules/express-session/package.json
+24 verbose targetResolver reading package data from /Users/antoine/src/flush-me/node_modules/mraa/package.json
+25 verbose targetResolver reading package data from /Users/antoine/src/flush-me/node_modules/q/package.json
+26 verbose targetResolver reading package data from /Users/antoine/src/flush-me/node_modules/socket.io/package.json
+27 verbose already installed skipping express-session@^1.11.3 /Users/antoine/src/flush-me
+28 silly cache add args [ 'q@latest', null ]
+29 verbose cache add spec q@latest
+30 verbose already installed skipping express@^4.10.2 /Users/antoine/src/flush-me
+31 verbose already installed skipping socket.io@^1.3.6 /Users/antoine/src/flush-me
+32 verbose already installed skipping body-parser@1.13.3 /Users/antoine/src/flush-me
+33 silly cache add parsed spec { raw: 'q@latest',
+33 silly cache add   scope: null,
+33 silly cache add   name: 'q',
+33 silly cache add   rawSpec: 'latest',
+33 silly cache add   spec: 'latest',
+33 silly cache add   type: 'tag' }
+34 silly addNamed q@latest
+35 verbose addNamed "latest" is being treated as a dist-tag for q
+36 info addNameTag [ 'q', 'latest' ]
+37 silly mapToRegistry name q
+38 silly mapToRegistry using default registry
+39 silly mapToRegistry registry https://registry.npmjs.org/
+40 silly mapToRegistry uri https://registry.npmjs.org/q
+41 verbose addNameTag registry:https://registry.npmjs.org/q not in flight; fetching
+42 verbose request uri https://registry.npmjs.org/q
+43 verbose request no auth needed
+44 info attempt registry request try #1 at 08:51:37
+45 verbose request id bc26be6ad0bcc527
+46 verbose etag "5DOV220SZI188PKCCL106OAD0"
+47 http request GET https://registry.npmjs.org/q
+48 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND registry.npmjs.org registry.npmjs.org:443
+49 info attempt registry request try #2 at 08:51:48
+50 verbose etag "5DOV220SZI188PKCCL106OAD0"
+51 http request GET https://registry.npmjs.org/q
+52 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND registry.npmjs.org registry.npmjs.org:443
+53 info attempt registry request try #3 at 08:52:48
+54 verbose etag "5DOV220SZI188PKCCL106OAD0"
+55 http request GET https://registry.npmjs.org/q
+56 silly get cb [ 304, undefined ]
+57 verbose etag https://registry.npmjs.org/q from cache
+58 verbose get saving q to /Users/antoine/.npm/registry.npmjs.org/q/.cache.json
+59 silly addNameTag next cb for q with tag latest
+60 silly addNamed q@1.4.1
+61 verbose addNamed "1.4.1" is a plain semver version for q
+62 silly cache afterAdd q@1.4.1
+63 verbose afterAdd /Users/antoine/.npm/q/1.4.1/package/package.json not in flight; writing
+64 verbose afterAdd /Users/antoine/.npm/q/1.4.1/package/package.json written
+65 info already installed q@1.4.1
+66 silly install resolved []
+67 info build /Users/antoine/src/flush-me
+68 info linkStuff flush-me@0.0.0
+69 silly linkStuff flush-me@0.0.0 has /Users/antoine/src as its parent node_modules
+70 verbose linkBins flush-me@0.0.0
+71 verbose linkMans flush-me@0.0.0
+72 verbose rebuildBundles flush-me@0.0.0
+73 verbose rebuildBundles [ 'body-parser',
+73 verbose rebuildBundles   'express',
+73 verbose rebuildBundles   'express-session',
+73 verbose rebuildBundles   'mraa',
+73 verbose rebuildBundles   'q',
+73 verbose rebuildBundles   'socket.io' ]
+74 verbose rebuild bundle /Users/antoine/src/flush-me/node_modules/mraa
+75 info build /Users/antoine/src/flush-me/node_modules/mraa
+76 info preinstall mraa@0.7.5
+77 info linkStuff mraa@0.7.5
+78 silly linkStuff mraa@0.7.5 has /Users/antoine/src/flush-me/node_modules as its parent node_modules
+79 verbose linkBins mraa@0.7.5
+80 verbose linkMans mraa@0.7.5
+81 verbose rebuildBundles mraa@0.7.5
+82 info install mraa@0.7.5
+83 verbose unsafe-perm in lifecycle true
+84 info mraa@0.7.5 Failed to exec install script
+85 verbose stack Error: mraa@0.7.5 install: `node-gyp rebuild`
+85 verbose stack Exit status 1
+85 verbose stack     at EventEmitter.<anonymous> (/Users/antoine/.nodenv/versions/iojs-2.2.1/lib/node_modules/npm/lib/utils/lifecycle.js:213:16)
+85 verbose stack     at emitTwo (events.js:87:13)
+85 verbose stack     at EventEmitter.emit (events.js:172:7)
+85 verbose stack     at ChildProcess.<anonymous> (/Users/antoine/.nodenv/versions/iojs-2.2.1/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+85 verbose stack     at emitTwo (events.js:87:13)
+85 verbose stack     at ChildProcess.emit (events.js:172:7)
+85 verbose stack     at maybeClose (internal/child_process.js:763:16)
+85 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:210:5)
+86 verbose pkgid mraa@0.7.5
+87 verbose cwd /Users/antoine/src/flush-me
+88 error Darwin 14.5.0
+89 error argv "/Users/antoine/.nodenv/versions/iojs-2.2.1/bin/iojs" "/Users/antoine/.nodenv/versions/iojs-2.2.1/bin/npm" "install"
+90 error node v2.2.1
+91 error npm  v2.11.0
+92 error code ELIFECYCLE
+93 error mraa@0.7.5 install: `node-gyp rebuild`
+93 error Exit status 1
+94 error Failed at the mraa@0.7.5 install script 'node-gyp rebuild'.
+94 error This is most likely a problem with the mraa package,
+94 error not with npm itself.
+94 error Tell the author that this fails on your system:
+94 error     node-gyp rebuild
+94 error You can get their info via:
+94 error     npm owner ls mraa
+94 error There is likely additional logging output above.
+95 verbose exit [ 1, true ]
